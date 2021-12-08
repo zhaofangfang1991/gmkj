@@ -24,7 +24,8 @@ def user_schema(user):
         'telnumber': user.telnumber,
         'gender': user.gender,
         'status': user.status,
-        'uptime': user.uptime
+        'uptime': user.uptime,
+        'borth': user.borth
     }
 
 def users_schema(users, current, prev, next, pagination):

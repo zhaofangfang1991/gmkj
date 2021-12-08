@@ -37,7 +37,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       create({ username: username.trim(), telnumber: telnumber, password: password, gender: gender, type: type }).then(response => {
         // const { data } = response
-        alert('回来了')
+        // alert('回来了')
         const data = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)

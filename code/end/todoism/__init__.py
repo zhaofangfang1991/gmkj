@@ -111,7 +111,7 @@ def register_commands(app):
         # create a admin account ,its username is admin,password is admin
         username = 'admin'
         password = '123456'
-        user = User(username=username)
+        user = User(username=username, type=8)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()

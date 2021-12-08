@@ -155,6 +155,7 @@ class UserAPI(MethodView):
         user.set_password(password)
         user.telnumber = telnumber
         user.gender = gender
+        user.status = 1
         user.type = limitValue
         db.session.add(user)
         db.session.commit()
@@ -169,7 +170,7 @@ class UserAPI(MethodView):
     # 查列表
     def get(self):
         page = request.args.get('page', 1, type=int)
-        pagination = User.query.filter_by(status = 1).paginate(
+        pagination = User.query.paginate(
             page, per_page=current_app.config['TODOISM_ITEM_PER_PAGE'])
 
         users = pagination.items
@@ -182,6 +183,12 @@ class UserAPI(MethodView):
             next = url_for('.user', page=page + 1, _external=True)
         return jsonify(users_schema(users, current, prev, next, pagination))
 
+    # 删除
+    def delete(self, id):
+        print(id)
+        print(189)
+        # 这里修改数据库
+        return jsonify(msg='success', code=200)
 
 class ItemsAPI(MethodView):
     decorators = [auth_required]
@@ -258,7 +265,7 @@ class CompletedItemsAPI(MethodView):
 
 api_v1.add_url_rule('/', view_func=IndexAPI.as_view('index'), methods=['GET'])
 api_v1.add_url_rule('/oauth/token', view_func=AuthTokenAPI.as_view('token'), methods=['GET', 'POST', 'DELETE'])
-api_v1.add_url_rule('/user', view_func=UserAPI.as_view('user'), methods=['GET', 'POST'])
+api_v1.add_url_rule('/user', view_func=UserAPI.as_view('user'), methods=['GET', 'POST', 'DELETE'])
 api_v1.add_url_rule('/user/items', view_func=ItemsAPI.as_view('items'), methods=['GET', 'POST'])
 api_v1.add_url_rule('/user/items/<int:item_id>', view_func=ItemAPI.as_view('item'),
                     methods=['GET', 'PUT', 'PATCH', 'DELETE'])

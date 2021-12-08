@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     telnumber = db.Column(db.String(11), unique=True, comment="手机号") #
     password_hash = db.Column(db.String(128), comment="密码hash") #
     gender = db.Column(db.SmallInteger, comment="性别，男1 女2") #
-    borth = db.Column(db.Date, comment="出生年月的时间戳") #
+    borth = db.Column(db.DateTime, comment="出生年月的时间戳") #
     address = db.Column(db.String(100), comment="住址") #
     type = db.Column(db.SmallInteger, comment="类型，管理员8 维修人员4 巡检人员2 设备负责人1") #
     status = db.Column(db.SmallInteger, comment="状态 正常1 删除9") #

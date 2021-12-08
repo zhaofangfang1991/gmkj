@@ -18,7 +18,7 @@ export function fetchArticle(id) {
 
 export function fetchPv(pv) {
   return request({
-    url: '/vue-element-admin/article/pv',
+    url: '/vue-element-admin/article/pv', // 阅读量
     method: 'get',
     params: { pv }
   })

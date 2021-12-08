@@ -73,7 +73,7 @@ export default {
           this.loading = true
           this.$store.dispatch('account/create', this.ruleForm)
             .then(() => {
-              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+              this.$router.push({ path: this.redirect || '/account-manage/list', query: this.otherQuery })
               this.loading = false
             })
             .catch(() => {

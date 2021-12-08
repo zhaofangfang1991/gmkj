@@ -30,6 +30,7 @@ export function parseTime(time, cFormat) {
 
     if ((typeof time === 'number') && (time.toString().length === 10)) {
       time = time * 1000
+      
     }
     date = new Date(time)
   }
@@ -37,7 +38,7 @@ export function parseTime(time, cFormat) {
     y: date.getFullYear(),
     m: date.getMonth() + 1,
     d: date.getDate(),
-    h: date.getHours(),
+    h: date.getHours() - 8, // 原作者PanJiaChen使用的是格林威治时间。此处-8
     i: date.getMinutes(),
     s: date.getSeconds(),
     a: date.getDay()

@@ -1,5 +1,5 @@
 module.exports = {
-  title: '钢猫科技-仓库设备后台管理系统',
+  title: '宜宾钢猫科技-设备管理系统',
 
   /**
    * @type {boolean} true | false

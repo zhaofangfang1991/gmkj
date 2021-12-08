@@ -9,6 +9,7 @@ export function create(data) {
   })
 }
 
+// 账号列表
 export function fetchList(query) {
   return request({
     url: '/user',
@@ -21,5 +22,13 @@ export function logout() {
   return request({
     url: '/user/logout',
     method: 'post'
+  })
+}
+
+// 删除
+export function deleteDictDetail(id) {
+  return request({
+    url: '/user/' + id,
+    method: 'delete'
   })
 }
