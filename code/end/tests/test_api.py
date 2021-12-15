@@ -53,7 +53,7 @@ class APITestCase(unittest.TestCase):
         }
 
     def test_api_index(self):
-        response = self.client.get(url_for('api_v1.index'))
+        response = self.client.get
         data = response.get_json()
         self.assertEqual(data['api_version'], '1.0')
 
@@ -69,8 +69,7 @@ class APITestCase(unittest.TestCase):
 
     def test_get_user(self):
         token = self.get_oauth_token()
-        response = self.client.get(url_for('api_v1.user'),
-                                   headers=self.set_auth_headers(token))
+        response = self.client.get
         data = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['username'], 'grey')
@@ -95,7 +94,7 @@ class APITestCase(unittest.TestCase):
                                    json=dict(body='New Item Body'),
                                    headers=self.set_auth_headers(token))
         self.assertEqual(response.status_code, 204)
-        self.assertEqual(Item.query.get(1).body, 'New Item Body')
+        self.assertEqual(Item.query.get.body, 'New Item Body')
 
         response = self.client.put(url_for('api_v1.item', item_id=1), json=dict(body=' '),
                                    headers=self.set_auth_headers(token))
@@ -113,7 +112,7 @@ class APITestCase(unittest.TestCase):
         response = self.client.delete(url_for('api_v1.item', item_id=1),
                                       headers=self.set_auth_headers(token))
         self.assertEqual(response.status_code, 204)
-        self.assertEqual(Item.query.get(1), None)
+        self.assertEqual(Item.query.get, None)
 
         response = self.client.delete(url_for('api_v1.item', item_id=2),
                                       headers=self.set_auth_headers(token))
@@ -125,12 +124,12 @@ class APITestCase(unittest.TestCase):
         response = self.client.patch(url_for('api_v1.item', item_id=1),
                                      headers=self.set_auth_headers(token))
         self.assertEqual(response.status_code, 204)
-        self.assertEqual(Item.query.get(1).done, True)
+        self.assertEqual(Item.query.get.done, True)
 
         response = self.client.patch(url_for('api_v1.item', item_id=1),
                                      headers=self.set_auth_headers(token))
         self.assertEqual(response.status_code, 204)
-        self.assertEqual(Item.query.get(1).done, False)
+        self.assertEqual(Item.query.get.done, False)
 
         response = self.client.patch(url_for('api_v1.item', item_id=2),
                                      headers=self.set_auth_headers(token))
@@ -141,17 +140,16 @@ class APITestCase(unittest.TestCase):
         response = self.client.patch(url_for('api_v1.item', item_id=1),
                                      headers=self.set_auth_headers(token))
         self.assertEqual(response.status_code, 204)
-        self.assertEqual(Item.query.get(1).done, True)
+        self.assertEqual(Item.query.get.done, True)
 
         response = self.client.delete(url_for('api_v1.completed_items'),
                                       headers=self.set_auth_headers(token))
         self.assertEqual(response.status_code, 204)
-        self.assertEqual(Item.query.get(1), None)
+        self.assertEqual(Item.query.get, None)
 
     def test_get_item(self):
         token = self.get_oauth_token()
-        response = self.client.get(url_for('api_v1.item', item_id=1),
-                                   headers=self.set_auth_headers(token))
+        response = self.client.get
         data = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertIn('id', data)
@@ -161,15 +159,14 @@ class APITestCase(unittest.TestCase):
         self.assertEqual(data['id'], 1)
 
     def test_get_items(self):
-        user = User.query.get(1)
+        user = User.query.get
         item2 = Item(body='Test Item 2', author=user)
         item3 = Item(body='Test Item 3', author=user)
         item4 = Item(body='Test Item 4', author=user, done=True)
         db.session.commit()
 
         token = self.get_oauth_token()
-        response = self.client.get(url_for('api_v1.items'),
-                                   headers=self.set_auth_headers(token))
+        response = self.client.get
         data = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertIn('self', data)
@@ -178,8 +175,7 @@ class APITestCase(unittest.TestCase):
         self.assertIn('next', data)
         self.assertEqual(data['count'], 4)
         # get active items
-        response = self.client.get(url_for('api_v1.active_items'),
-                                   headers=self.set_auth_headers(token))
+        response = self.client.get
         data = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertIn('self', data)
@@ -188,8 +184,7 @@ class APITestCase(unittest.TestCase):
         self.assertIn('next', data)
         self.assertEqual(data['count'], 3)
         # get completed items
-        response = self.client.get(url_for('api_v1.completed_items'),
-                                   headers=self.set_auth_headers(token))
+        response = self.client.get
         data = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertIn('self', data)
@@ -199,7 +194,7 @@ class APITestCase(unittest.TestCase):
         self.assertEqual(data['count'], 1)
 
     def test_404_response(self):
-        response = self.client.get('/api/foo')
+        response = self.client.get
         data = response.get_json()
         self.assertEqual(data['message'], 'The requested URL was not found on the server.')
 

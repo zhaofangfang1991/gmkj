@@ -3,7 +3,7 @@ import request from '@/utils/request'
 
 export function create(data) {
   return request({
-    url: '/user',
+    url: '/users',
     method: 'post',
     data
   })
@@ -12,7 +12,7 @@ export function create(data) {
 // 账号列表
 export function fetchList(query) {
   return request({
-    url: '/user',
+    url: '/users',
     method: 'get',
     params: query
   })
@@ -26,9 +26,18 @@ export function logout() {
 }
 
 // 删除
-export function deleteDictDetail(id) {
+export function deleteAccount(id) {
   return request({
     url: '/user/' + id,
-    method: 'delete'
+    method: 'patch'
+  })
+}
+
+// 更新
+export function updateAccount(tempData) {
+  return request({
+    url: '/user/' + tempData.id,
+    method: 'put',
+    params: tempData
   })
 }

@@ -39,7 +39,7 @@ class AuthTestCase(unittest.TestCase):
             username='grey',
             password='123'
         ), follow_redirects=True)
-        response = self.client.get(url_for('auth.logout'), follow_redirects=True)
+        response = self.client.get
         data = response.get_json()
         self.assertIn(data['message'], 'Logout success.')
 
@@ -53,12 +53,12 @@ class AuthTestCase(unittest.TestCase):
         self.assertIn(data['message'], 'Invalid username or password.')
 
     def test_view_protect(self):
-        response = self.client.get(url_for('todo.app'), follow_redirects=True)
+        response = self.client.get
         data = response.get_data(as_text=True)
         self.assertIn('Login on Todoism', data)
 
     def test_get_test_account(self):
-        response = self.client.get(url_for('auth.register'), follow_redirects=True)
+        response = self.client.get
         data = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertIn('username', data)

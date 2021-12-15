@@ -25,7 +25,7 @@ def validate_token(token):
         data = s.loads(token)
     except (BadSignature, SignatureExpired):
         return False
-    user = User.query.get(data['id'])
+    user = User.query.get
     if user is None:
         return False
     g.current_user = user

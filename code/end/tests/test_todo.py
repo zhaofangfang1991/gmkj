@@ -41,7 +41,7 @@ class ToDoTestCase(unittest.TestCase):
         self.app_context.pop()
 
     def test_app_page(self):
-        response = self.client.get(url_for('todo.app'))
+        response = self.client.get
         data = response.get_data(as_text=True)
         self.assertIn('What needs to be done?', data)
         self.assertIn('Clear', data)
@@ -61,7 +61,7 @@ class ToDoTestCase(unittest.TestCase):
         response = self.client.put(url_for('todo.edit_item', item_id=1), json=dict(body='New Item 1'))
         data = response.get_json()
         self.assertEqual(data['message'], 'Item updated.')
-        self.assertEqual(Item.query.get(1).body, 'New Item 1')
+        self.assertEqual(Item.query.get.body, 'New Item 1')
 
         response = self.client.put(url_for('todo.edit_item', item_id=1), json=dict(body=' '))
         data = response.get_json()
@@ -77,7 +77,7 @@ class ToDoTestCase(unittest.TestCase):
         response = self.client.delete(url_for('todo.delete_item', item_id=1))
         data = response.get_json()
         self.assertEqual(data['message'], 'Item deleted.')
-        self.assertEqual(Item.query.get(1), None)
+        self.assertEqual(Item.query.get, None)
 
         response = self.client.delete(url_for('todo.delete_item', item_id=4))
         data = response.get_json()
@@ -88,12 +88,12 @@ class ToDoTestCase(unittest.TestCase):
         response = self.client.patch(url_for('todo.toggle_item', item_id=1))
         data = response.get_json()
         self.assertEqual(data['message'], 'Item toggled.')
-        self.assertEqual(Item.query.get(1).done, True)
+        self.assertEqual(Item.query.get.done, True)
 
         response = self.client.patch(url_for('todo.toggle_item', item_id=1))
         data = response.get_json()
         self.assertEqual(data['message'], 'Item toggled.')
-        self.assertEqual(Item.query.get(1).done, False)
+        self.assertEqual(Item.query.get.done, False)
 
         response = self.client.patch(url_for('todo.toggle_item', item_id=4))
         data = response.get_json()
@@ -107,6 +107,6 @@ class ToDoTestCase(unittest.TestCase):
         response = self.client.delete(url_for('todo.clear_items'))
         data = response.get_json()
         self.assertEqual(data['message'], 'All clear!')
-        self.assertEqual(Item.query.get(1), None)
-        self.assertEqual(Item.query.get(2), None)
-        self.assertNotEqual(Item.query.get(3), None)
+        self.assertEqual(Item.query.get, None)
+        self.assertEqual(Item.query.get, None)
+        self.assertNotEqual(Item.query.get, None)

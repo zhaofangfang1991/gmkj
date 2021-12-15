@@ -140,7 +140,7 @@ export const asyncRoutes = [
     name: '账号管理',
     meta: {
       title: '账号管理',
-      icon: 'el-icon-s-help'
+      icon: 'el-icon-circle-plus-outline' 
     },
     children: [
       {
@@ -154,6 +154,31 @@ export const asyncRoutes = [
         component: () => import('@/views/account/list'),
         name: '账号列表',
         meta: { title: '账号列表', icon: 'documentation' }
+      }
+    ]
+  },
+  // 设备管理
+  {
+    path: '/tool',
+    component: Layout,
+    redirect: '/tool/add',
+    name: '设备管理',
+    meta: {
+      title: '设备管理',
+      icon: 'el-icon-s-help'
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/tool/add'),
+        name: '新增设备',
+        meta: { title: '新增设备', icon: 'education', noCache: true }
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/tool/list'),
+        name: '设备列表',
+        meta: { title: '设备列表', icon: 'list' }
       }
     ]
   },

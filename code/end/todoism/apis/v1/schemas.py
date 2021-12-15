@@ -11,7 +11,7 @@ from todoism.models import Item
 def user_schema(user):
     return {
         'id': user.id,
-        'self': url_for('.user', _external=True),
+        'self': url_for('.users', _external=True),
         'kind': 'User',
         'username': user.username,
         'all_items_url': url_for('.items', _external=True),
@@ -25,7 +25,8 @@ def user_schema(user):
         'gender': user.gender,
         'status': user.status,
         'uptime': user.uptime,
-        'borth': user.borth
+        'borth': user.borth,
+        "role_type": user.role_type
     }
 
 def users_schema(users, current, prev, next, pagination):

@@ -30,7 +30,6 @@ export function parseTime(time, cFormat) {
 
     if ((typeof time === 'number') && (time.toString().length === 10)) {
       time = time * 1000
-      
     }
     date = new Date(time)
   }

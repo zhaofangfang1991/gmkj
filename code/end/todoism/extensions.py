@@ -21,7 +21,7 @@ login_manager.login_message = _l('Please login to access this page.')
 @login_manager.user_loader
 def load_user(user_id):
     from todoism.models import User
-    return User.query.get(int(user_id))
+    return User.query.get
 
 
 @babel.localeselector
@@ -29,7 +29,7 @@ def get_locale():
     if current_user.is_authenticated and current_user.locale is not None:
         return current_user.locale
 
-    locale = request.cookies.get('locale')
+    locale = request.cookies.get
     if locale is not None:
         return locale
     return request.accept_languages.best_match(current_app.config['TODOISM_LOCALES'])

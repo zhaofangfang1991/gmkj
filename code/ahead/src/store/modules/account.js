@@ -32,13 +32,25 @@ const mutations = {
 
 const actions = {
   create({ commit }, ruleForm) {
-    const { username, telnumber, password, gender, type } = ruleForm
-    // console.log(type)
+    const { username, telnumber, password, gender, role_type } = ruleForm
+
+    console.log(role_type, typeof role_type)
+    
+    // console.log("ruleForm", ruleForm, typeof ruleForm)
+    // console.log(ruleForm.value1);
+    // console.log(ruleForm.value2);
+    // return false;
     return new Promise((resolve, reject) => {
-      create({ username: username.trim(), telnumber: telnumber, password: password, gender: gender, type: type }).then(response => {
+      create({ username: username.trim(), telnumber: telnumber, password: password, gender: gender, role_type: role_type }).then(response => {
         // const { data } = response
-        // alert('回来了')
+        // alert("come back")
         const data = response
+
+        // TODO 这里需要补充处理接口报错的部分
+        // if (data.response_code != 20000 ) {
+        //   this.$message({ type: 'danger', message: data.msg }) // 因为有这一句报错，所以执行到这里就回去了。和API的返回值报错没有任何关系
+        //   return false;
+        // }
         commit('SET_TOKEN', data.token)
         setToken(data.token)
         resolve()

@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     status = db.Column(db.SmallInteger, comment="状态 正常1 删除9") #
     uptime = db.Column(db.DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now, comment="登录时间，每次更新") #
     locale = db.Column(db.String(20))
+    role_type = db.Column(db.String(11), comment="角色类型值，字符串，“1”，“2”，等")
     items = db.relationship('Item', back_populates='author', cascade='all')
 
     def set_password(self, password):
@@ -38,3 +39,9 @@ class Item(db.Model):
     done = db.Column(db.Boolean, default=False)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship('User', back_populates='items')
+
+
+class Tool(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+
